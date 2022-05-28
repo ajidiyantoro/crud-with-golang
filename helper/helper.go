@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -37,4 +38,14 @@ func MessageResponse(message string, code int, status string, data interface{}) 
 	}
 
 	return jsonResponse
+}
+
+func FormatValidationError(err error) []string {
+	var errors []string
+
+	for _, e := range err.(validator.ValidationErrors) {
+		errors = append(errors, e.Error())
+	}
+
+	return errors
 }
