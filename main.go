@@ -25,6 +25,8 @@ func main() {
 
 	router := gin.Default()
 	api := router.Group("/api/v1")
+	api.GET("/users", userHandler.GetUsers)
+	api.GET("/users/:id", userHandler.GetUserByID)
 	api.POST("/users", userHandler.CreateUser)
 
 	router.Run("localhost:8080")
